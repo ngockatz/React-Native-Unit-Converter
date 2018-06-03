@@ -3,29 +3,46 @@ import { View, Text, Picker, TextInput, TouchableOpacity } from 'react-native';
 
 export default class Temp extends Component {
 
-    state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: 0 }
+    constructor(props){
+    super(props);
+    this.state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: 0 };
+    }
 
     calculate() {
 
         let currentIntermediary, targetIntermediary, target
         //intermediary is C
-        switch (this.state.unitFrom){
+        //alert(this.state.userInput)
+        /*switch (this.state.unitFrom) {
             case 'F':
-                currentIntermediary = ((this.state.userInput)*5)/9;
+                currentIntermediary = (parseFloat(this.state.userInput) - 32) * 5 / 9;
             case 'C':
                 currentIntermediary = 1;
+            default:
+                currentIntermediary=100
         }
+        */
+       if (this.state.unitFrom='F'){
+            currentIntermediary = (parseFloat(this.state.userInput) - 32) * 5 / 9;
+       } else {currentIntermediary=1}
+        console.log(parseInt(this.state.userInput))
+        console.log(currentIntermediary)
+        console.log(this.state.unitFrom)
+        
 
-        switch (this.state.unitTo){
+        switch (this.state.unitTo) {
             case 'F':
-                targetIntermediary = ((this.state.userInput)*5)/9;
+                targetIntermediary = (parseInt(this.state.userInput) - 32) * 5 / 9;
             case 'C':
-                targetIntermediary = 1;
+                targetIntermediary = 1
+            default:
+                targetIntermediary=1
         }
-        
-        target = parseInt(this.state.userInput)*currentIntermediary/targetIntermediary+10
-        
-        this.setState({result: target })
+        console.log(targetIntermediary)
+        console.log(this.state.unitTo)
+        target = (currentIntermediary / targetIntermediary)
+
+        this.setState({ result: target })
         //console.log(this.state.result)
 
     }
@@ -44,38 +61,41 @@ export default class Temp extends Component {
                             <Picker
                                 selectedValue={this.state.unitFrom}
                                 style={{ height: 50, width: 100 }}
-                                onValueChange={(itemValue, itemIndex) => {
+                                onValueChange={(itemValue, itemIndex) => 
                                     this.setState({ unitFrom: itemValue })
-                                    this.calculate.bind(this)
-                                        }}>
+                                    //this.calculate.bind(this)
+                                }>
                                 <Picker.Item label="°C" value="C" />
                                 <Picker.Item label="°F" value="F" />
                             </Picker>
                         </View>
                         <TextInput
                             value={this.state.userInput}
-                            onChangeText={text => {
+                            onChangeText={text =>
                                 this.setState({ userInput: text })
-                                this.calculate.bind(this)
-                                }}
-                            maxLength= {10}
+                                //this.calculate.bind(this)
+                            }
+                            maxLength={10}
                         />
                     </View>
 
-                    <TouchableOpacity onPress ={this.calculate.bind(this)} >
-                        <Text> Reverse </Text>
+                    <TouchableOpacity onPress={this.calculate.bind(this)} >
+                        <Text> calculatezz </Text>
                     </TouchableOpacity>
 
-                    <View style={styles.unitSelection} >
-                        <Picker
-                            selectedValue={this.state.unitTo}
-                            style={{ height: 50, width: 100 }}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ unitTo: itemValue })}>
-                            <Picker.Item label="°C" value="C" />
-                            <Picker.Item label="°F" value="F" />
-                        </Picker>
+                    <View>
+                        <View style={styles.unitSelection} >
+                            <Picker
+                                selectedValue={this.state.unitTo}
+                                style={{ height: 50, width: 100 }}
+                                onValueChange={(itemVal, itemInd) => this.setState({ unitTo: itemVal })}>
+                                <Picker.Item label="°C" value="C" />
+                                <Picker.Item label="°F" value="F" />
+                            </Picker>
+                            
+                        </View>
+                        <Text>Value: {this.state.result} </Text>
                     </View>
-                    <Text>Value: {this.state.result} </Text>
 
                 </View>
             </View>
