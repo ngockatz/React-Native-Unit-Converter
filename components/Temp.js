@@ -9,23 +9,21 @@ export default class Temp extends Component {
     }
 
     calculate() {
-
         let intermediary, target;
         // Intermediary: C
-       if (this.state.unitFrom='F'){
+       if (this.state.unitFrom=='F'){
             intermediary = (this.state.userInput - 32) * 5 / 9;
        } 
-       else if (this.state.unitFrom='C'){
-           intermediary = this.state.userInput
-        }
+       else if (this.state.unitFrom=='C'){
+           intermediary = this.state.userInput;
+        };
 
-        if(this.state.unitTo='F'){
-            target=intermediary*1.8+32
+        if(this.state.unitTo=='F'){
+            target=intermediary*1.8+32;
         }
-        else if(this.state.unitTo='C'){
-            target = intermediary
-        }
-
+        else if(this.state.unitTo=='C'){
+            target = intermediary;
+        };
         this.setState({result: target});
     }
     render() {
@@ -52,7 +50,7 @@ export default class Temp extends Component {
                         </View>
                         <TextInput
                             value={this.state.userInput}
-                            onChangeText={text =>
+                            onChangeText={text => 
                                 this.setState({ userInput: text })
                                 //this.calculate.bind(this)
                             }
