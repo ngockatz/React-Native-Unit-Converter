@@ -12,13 +12,16 @@ import {
   View
 } from 'react-native';
 
+import CardSection from './components/CardSection';
 import Temp from './components/Temp';
 
 export default class App extends Component<Props> {
   render() {
     return (
       <View>
-        <Temp />
+        <CardSection>
+          <Temp />
+        </CardSection>
       </View>
     );
   }
