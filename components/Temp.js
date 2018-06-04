@@ -10,43 +10,24 @@ export default class Temp extends Component {
 
     calculate() {
 
-        let currentIntermediary, targetIntermediary, target
-        //intermediary is C
-        //alert(this.state.userInput)
-        /*switch (this.state.unitFrom) {
-            case 'F':
-                currentIntermediary = (parseFloat(this.state.userInput) - 32) * 5 / 9;
-            case 'C':
-                currentIntermediary = 1;
-            default:
-                currentIntermediary=100
-        }
-        */
+        let intermediary, target;
+        // Intermediary: C
        if (this.state.unitFrom='F'){
-            currentIntermediary = (parseFloat(this.state.userInput) - 32) * 5 / 9;
-       } else {currentIntermediary=1}
-        console.log(parseInt(this.state.userInput))
-        console.log(currentIntermediary)
-        console.log(this.state.unitFrom)
-        
-
-        switch (this.state.unitTo) {
-            case 'F':
-                targetIntermediary = (parseInt(this.state.userInput) - 32) * 5 / 9;
-            case 'C':
-                targetIntermediary = 1
-            default:
-                targetIntermediary=1
+            intermediary = (this.state.userInput - 32) * 5 / 9;
+       } 
+       else if (this.state.unitFrom='C'){
+           intermediary = this.state.userInput
         }
-        console.log(targetIntermediary)
-        console.log(this.state.unitTo)
-        target = (currentIntermediary / targetIntermediary)
 
-        this.setState({ result: target })
-        //console.log(this.state.result)
+        if(this.state.unitTo='F'){
+            target=intermediary*1.8+32
+        }
+        else if(this.state.unitTo='C'){
+            target = intermediary
+        }
 
+        this.setState({result: target});
     }
-
     render() {
         return (
             <View>
