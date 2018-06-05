@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, Picker, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class Temp extends Component {
+class Temp extends Component {
 
-    constructor(props){
-    super(props);
-    this.state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null };
-    }
+    state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null };
+    
 
     calculate() {
-        
         // Intermediary: C
     if(this.state.userInput!==''){
         let intermediary, target;
@@ -32,7 +29,7 @@ export default class Temp extends Component {
         this.setState({result: target});
     }
     else{
-        this.setState({'result': null})
+        this.setState({result: null})
     }
     }
     reverse(){
@@ -112,7 +109,7 @@ export default class Temp extends Component {
     }
 }
 
-styles = {
+const styles = {
     headerStyle: {
         paddingBottom: 10,
         backgroundColor: '#e82813',
@@ -153,3 +150,5 @@ styles = {
         borderRadius: 10,
     }
 }
+
+export default Temp;

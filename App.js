@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -14,14 +9,22 @@ import {
 
 import CardSection from './components/CardSection';
 import Temp from './components/Temp';
+import Currency from './components/Currency'
 
 export default class App extends Component<Props> {
   render() {
     return (
       <View>
+
+        <CardSection>
+          <Currency />
+        </CardSection>
+
         <CardSection>
           <Temp />
         </CardSection>
+
+        
       </View>
     );
   }
