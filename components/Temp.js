@@ -5,103 +5,112 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 class Temp extends Component {
 
     state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null };
-    
 
+    formatNumber (num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
     calculate() {
         // Intermediary: C
-    if(this.state.userInput!==''){
-        let intermediary, target;
-       if (this.state.unitFrom=='F'){
-            intermediary = (this.state.userInput - 32) * 5 / 9;
-       } 
-       else if (this.state.unitFrom=='C'){
-           intermediary = this.state.userInput;
-        };
+        if (this.state.userInput !== '') {
+            let intermediary, target;
+            if (this.state.unitFrom == 'F') {
+                intermediary = (this.state.userInput - 32) * 5 / 9;
+            }
+            else if (this.state.unitFrom == 'C') {
+                intermediary = this.state.userInput;
+            };
 
-        if(this.state.unitTo=='F'){
-            target=intermediary*1.8+32;
+            if (this.state.unitTo == 'F') {
+                target = intermediary * 1.8 + 32;
+            }
+            else if (this.state.unitTo == 'C') {
+                target = intermediary;
+            };
+            target=this.formatNumber(target.toFixed(1))
+            this.setState({ result: target });
         }
-        else if(this.state.unitTo=='C'){
-            target = intermediary;
-        };
-
-        target=target.toFixed(1)
-        this.setState({result: target});
+        else {
+            this.setState({ result: null })
+        }
     }
-    else{
-        this.setState({result: null})
-    }
-    }
-    reverse(){
-        let temp1,temp2;
-        temp1=this.state.unitFrom;
-        temp2=this.state.unitTo;
-        this.setState({unitFrom: temp2, unitTo:temp1},()=>{
-        this.calculate()})
+    reverse() {
+        let temp1, temp2;
+        temp1 = this.state.unitFrom;
+        temp2 = this.state.unitTo;
+        this.setState({ unitFrom: temp2, unitTo: temp1 }, () => {
+            this.calculate()
+        })
     }
     render() {
+        const { headerContainer, headerText, contentsContainer, inputContainer, 
+            pickerStyle, inputTextStyle, resultText } = styles;
+
         return (
             <View>
-                <View style={styles.headerStyle} >
-                    <Text style={styles.headerText}> Temperature/Nhiệt độ </Text>
+                <View style={headerContainer} >
+                    <Text style={headerText}> Temperature/Nhiệt độ </Text>
                 </View>
 
-                <View style={styles.unitRow} >
+                <View style={contentsContainer} >
 
-                    <View style={{flex:2}}>
-                        <View style={styles.unitSelection} >
-                            <Picker
-                                selectedValue={this.state.unitFrom}
-                                style={{ height: 40, width: 100 }}
-                                onValueChange={(itemValue, itemIndex) => 
-                                    this.setState({ unitFrom: itemValue },()=>{
-                                    this.calculate()})
-                                }>
-                                <Picker.Item label="°C" value="C" />
-                                <Picker.Item label="°F" value="F" />
-                            </Picker>
-                        </View>
+                    <View style={inputContainer}>
+                        <Picker
+                            selectedValue={this.state.unitFrom}
+                            style={pickerStyle}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ unitFrom: itemValue }, () => {
+                                    this.calculate()
+                                })
+                            }>
+                            <Picker.Item label="°C (Celsius)" value="C" />
+                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                        </Picker>
                         <TextInput
-                            placeholder="(from)"
-                            style={styles.inputStyle}
-                            value={this.state.userInput}
-                            onChangeText={text => 
-                                this.setState({ userInput: text },() => {
-                                this.calculate()})
+                            placeholder=""
+                            style={inputTextStyle}
+                            value= {(this.formatNumber(this.state.userInput))}
+                            onChangeText={text =>
+                                this.setState({ userInput: text.replace(/,/g,'') }, () => {
+                                    this.calculate()
+                                })
                             }
-                            maxLength={12}
+                            maxLength={15}
                             keyboardType='numeric'
                         />
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={this.reverse.bind(this)}
-                        style={{flex:1,paddingLeft:17,alignSelf:'center'}}
+                        style={{flex:1}}
                     >
-                        <Icon name='swap-horizontal-variant' size={70} />
+                        <Icon name='swap-horizontal-variant' 
+                              size={50}
+                              style={{alignSelf:'center'}} 
+                        />
                     </TouchableOpacity>
 
 
-                    <View style={{flex:2}}>
-                        <View style={styles.unitSelection} >
-                            <Picker
-                                style={styles.pickerStyle}
-                                selectedValue={this.state.unitTo}
-                                style={{ height: 40, width: 100 }}
-                                onValueChange={(itemVal, itemInd) => {
-                                    this.setState({ unitTo: itemVal }, () =>
+                    <View style={inputContainer}>
+                        <Picker
+                            style={pickerStyle}
+                            selectedValue={this.state.unitTo}
+                            onValueChange={(itemVal, itemInd) => {
+                                this.setState({ unitTo: itemVal }, () =>
                                     this.calculate()
-                                    )}}>
-                                <Picker.Item label="°C" value="C" />
-                                <Picker.Item label="°F" value="F" />
-                            </Picker>
-                            
-                        </View>
-                        <Text style={styles.resultText}> {this.state.result} </Text>
+                                )
+                            }}>
+                            <Picker.Item label="°C (Celsius)" value="C" />
+                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                        </Picker>
+
+                        <TextInput 
+                            style={inputTextStyle}
+                            editable = {false}
+                        > {this.state.result} </TextInput>
                     </View>
-                    
+
                 </View>
-                
+
 
 
             </View>
@@ -110,44 +119,48 @@ class Temp extends Component {
 }
 
 const styles = {
-    headerStyle: {
+    headerContainer: {
         paddingBottom: 10,
         backgroundColor: '#e82813',
         alignSelf: 'stretch',
-        
-        
+
+
     },
-    headerText:{
-        color:'#ffffff',
+    headerText: {
+        color: 'white',
         fontSize: 20,
-        
-        
+
     },
-    unitRow: {
+
+    contentsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        
+        alignItems: 'center',
+
     },
-    unitSelection: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        
+
+    inputContainer:{
+        flex:2,
+        justifyContent:'space-between',
     },
-    resultText:{
+
+    resultText: {
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'black',
         fontSize: 20,
-        paddingTop: 10,
     },
-    inputStyle:{
+    inputTextStyle: {
         fontWeight: 'bold',
         color: 'black',
         fontSize: 20,
+        
     },
-    pickerStyle:{
+    pickerStyle: {
         borderStyle: 'solid',
         borderRadius: 10,
+        //flex: 1 //?
+        
     }
 }
 
