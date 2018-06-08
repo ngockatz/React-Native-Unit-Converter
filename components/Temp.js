@@ -4,8 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles/Styles';
 
-//const { headerContainer, headerText, contentsContainer, inputContainer, 
-//    pickerStyle, inputTextStyle, resultText } = styles;
 
 class Temp extends Component {
 
@@ -85,23 +83,18 @@ class Temp extends Component {
                 <View style={contentsContainer} >
 
                     <View style={inputContainer}>
-                    <View>
                         <Picker
                             selectedValue={this.state.unitFrom}
-                            //selectedValue='hi'
                             style={pickerStyle}
                             onValueChange={this.handleFromChange
                             }>
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
                         </Picker>
-                        </View>
                         <View>
                         <TextInput
                             placeholder=""
                             style={inputTextStyle}
-                            contextMenuHidden={true}
-                            caretHidden={true}
                             value= {this.state.userInput}
                             onChangeText={this.updateAndCalculate}
                             
@@ -129,7 +122,6 @@ class Temp extends Component {
                     </View>
 
                     <View style={inputContainer}>
-                    <View>
                         <Picker
                             style={[pickerStyle]}
                             selectedValue={this.state.unitTo}
@@ -138,7 +130,6 @@ class Temp extends Component {
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
                         </Picker>
-                        </View>
                         <View style={{}}>
                         <Text 
                             style={[inputTextStyle,{textAlign:'center',paddingBottom:15}]}
