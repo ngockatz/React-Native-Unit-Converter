@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   headerContainer: {
     paddingBottom: 10,
-    //backgroundColor: '#e82813',
     alignSelf: "stretch"
   },
   headerText: {
@@ -12,30 +11,40 @@ export default StyleSheet.create({
 
   contentsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    //justifyContent: "space-between",
     alignItems: "stretch"
   },
 
   inputContainer: {
-    flex: 2,
+    flex: 2.5,
     justifyContent: "space-between"
   },
 
   resultText: {
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "black",
-    fontSize: 20
+    textAlign:'center',
+    paddingBottom:12
   },
-  inputTextStyle: {
-    fontWeight: "bold",
+  textStyle: {
+    //fontWeight: "bold",
     color: "black",
     fontSize: 20,
-    backgroundColor:'green'
   },
+
+  iconStyle:{
+    width:30,
+    height:30
+  },
+
+  iconContainer:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'space-around'
+  }
+  /*
   pickerStyle: {
     borderStyle: "solid",
     borderRadius: 10,
     backgroundColor:'blue'
   }
+  */
 });

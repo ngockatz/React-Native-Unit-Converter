@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontIcon from 'react-native-vector-icons/FontAwesome';
-import styles from './styles/Styles';
+import { View, Text, Picker, TextInput, TouchableOpacity, Image } from 'react-native';
+import s from './styles/Styles';
 
 
 class Temp extends Component {
@@ -10,7 +8,6 @@ class Temp extends Component {
     constructor(props){
         super(props);
         this.state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null }
-        this.clearInput=this.clearInput.bind(this);
         
     }
     
@@ -18,7 +15,7 @@ class Temp extends Component {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
-    clearInput (){
+    clearInput = () => {
         this.setState({userInput:null});
     }
 
@@ -48,7 +45,7 @@ class Temp extends Component {
                 target = intermediary;
             };
 
-            this.setState({ result: parseFloat(target).toFixed(1) });
+            this.setState({ result: this.formatNumber(parseFloat(target).toFixed(1)) });
         }
         else {
             this.setState({ result: null })
@@ -69,71 +66,54 @@ class Temp extends Component {
      )
     }
 
-    render() {
-        const { headerContainer, headerText, contentsContainer, inputContainer, 
-            pickerStyle, inputTextStyle, resultText } = styles;
-        
+    render() {        
         return (
             
             <View>
-                <View style={[headerContainer,{backgroundColor: '#e82813'}]} >
-                    <Text style={headerText}> Temperature/Nhiệt độ </Text>
+                <View style={[s.headerContainer,{backgroundColor: '#e82813'}]} >
+                    <Text style={s.headerText}> Temperature/Nhiệt độ </Text>
                 </View>
 
-                <View style={contentsContainer} >
+                <View style={s.contentsContainer} >
 
-                    <View style={inputContainer}>
+                    <View style={s.inputContainer}>
                         <Picker
                             selectedValue={this.state.unitFrom}
-                            style={pickerStyle}
-                            onValueChange={this.handleFromChange
-                            }>
+                            style={s.pickerStyle}
+                            onValueChange={this.handleFromChange}>
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
                         </Picker>
                         <View>
-                        <TextInput
-                            placeholder=""
-                            style={inputTextStyle}
-                            value= {this.state.userInput}
-                            onChangeText={this.updateAndCalculate}
-                            
-                            //maxLength={15}
-                            keyboardType='numeric'
-                        />
+                            <TextInput
+                                placeholder="Nhập số"
+                                style={s.textStyle}
+                                value= {this.state.userInput}
+                                onChangeText={this.updateAndCalculate}
+                                maxLength={18}
+                                keyboardType='numeric'
+                            />
                         </View>
                     </View>
-                    <View style={{flex:1,alignItems:'center'}}>
-                        <TouchableOpacity
-                            onPress={this.swap}
-                        >
-                            <Icon name='swap-horizontal-variant' 
-                                size={50}
-                            />
+                    <View style={s.iconContainer} >
+                        <TouchableOpacity onPress={this.swap}>
+                            <Image source={require('../assets/images/swap-icon.png')} style={s.iconStyle}/>
                         </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={this.clearInput}
-                        >
-                            <FontIcon name='recycle' 
-                                size={50}
-                            />
+                        <TouchableOpacity onPress={this.clearInput}>
+                            <Image source={require('../assets/images/trash-icon.png')} style={s.iconStyle}/> 
                         </TouchableOpacity>
                     </View>
 
-                    <View style={inputContainer}>
+                    <View style={s.inputContainer}>
                         <Picker
-                            style={[pickerStyle]}
                             selectedValue={this.state.unitTo}
-                            onValueChange={this.handleToChange
-                            }>
+                            onValueChange={this.handleToChange}>
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
                         </Picker>
-                        <View style={{}}>
-                        <Text 
-                            style={[inputTextStyle,{textAlign:'center',paddingBottom:15}]}
-                        > {this.state.result} </Text>
+                        <View>
+                            <Text style={[s.textStyle,s.resultText]}> {this.state.result} </Text>
                         </View>
                     </View>
 

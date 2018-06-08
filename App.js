@@ -4,7 +4,7 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  ScrollView
 } from 'react-native';
 
 import CardSection from './components/CardSection';
@@ -14,7 +14,7 @@ import Currency from './components/Currency'
 export default class App extends Component<Props> {
   render() {
     return (
-      <View>
+      <ScrollView>
 {/*
         <CardSection>
           <Currency />
@@ -32,7 +32,7 @@ export default class App extends Component<Props> {
           <Temp />
         </CardSection>
 
-      </View>
+      </ScrollView>
     );
   }
 }

@@ -3,17 +3,13 @@ import { View, Text, Picker, TextInput,
     TouchableOpacity,
     AsyncStorage
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from './styles/Styles';
+import s from './styles/Styles';
 
 class Currency extends Component {
 /*
     constructor(props){
     super(props)
     this.state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '' }
-    const { headerContainer, headerText, contentsContainer, inputContainer, 
-        pickerStyle, inputTextStyle, resultText } = styles;
-    }
 
     componentDidMount() {
         
