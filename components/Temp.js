@@ -12,11 +12,17 @@ class Temp extends Component {
     }
     
     formatNumber (num) {
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        //alert(typeof num)
+        if (num!==''){
+            if (isNaN(num)){
+                num=num.replace(/[&\/\\#,+()$~%'":*?<>{}]/g, '');
+            }
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
     }
 
     clearInput = () => {
-        this.setState({userInput:null});
+        this.setState({userInput:''});
     }
 
     handleToChange = (unit2) => {
@@ -45,7 +51,8 @@ class Temp extends Component {
                 target = intermediary;
             };
 
-            this.setState({ result: this.formatNumber(parseFloat(target).toFixed(1)) });
+            if (!isNaN(target)){
+            this.setState({ result: this.formatNumber(parseFloat(target).toFixed(1)) });}
         }
         else {
             this.setState({ result: null })
@@ -61,7 +68,7 @@ class Temp extends Component {
     }
 
     updateAndCalculate = (text) => {
-        this.setState({userInput: text},() => 
+        this.setState({userInput: text.replace(/,/g,'')},() => 
             this.calculate()
      )
     }
@@ -88,10 +95,10 @@ class Temp extends Component {
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}
-                                value= {this.state.userInput}
+                                value= {this.formatNumber(this.state.userInput)}
                                 onChangeText={this.updateAndCalculate}
                                 maxLength={18}
-                                keyboardType='numeric'
+                                keyboardType='phone-pad'
                             />
                         </View>
                     </View>
