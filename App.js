@@ -15,16 +15,23 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View>
-
+{/*
         <CardSection>
           <Currency />
+        </CardSection>
+*/}
+        <CardSection>
+          <Temp />
         </CardSection>
 
         <CardSection>
           <Temp />
         </CardSection>
 
-        
+        <CardSection>
+          <Temp />
+        </CardSection>
+
       </View>
     );
   }

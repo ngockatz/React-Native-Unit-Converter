@@ -4,12 +4,17 @@ import { View, Text, Picker, TextInput,
     AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from './styles/Styles';
 
 class Currency extends Component {
-
-    state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '' }
-
 /*
+    constructor(props){
+    super(props)
+    this.state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '' }
+    const { headerContainer, headerText, contentsContainer, inputContainer, 
+        pickerStyle, inputTextStyle, resultText } = styles;
+    }
+
     componentDidMount() {
         
         fetch('https://openexchangerates.org/api/latest.json?app_id=1cd652359fc14d158810a58807b31fbe')
@@ -20,7 +25,7 @@ class Currency extends Component {
                 this.setState({currency: JSON.parse(value)})
     }))
 }
-//*/
+//
     calculate() {
         const { unitFrom, unitTo, result, userInput, currency } = this.state;
         
@@ -45,13 +50,14 @@ class Currency extends Component {
         })
     }
     render() {
+
         return (
             <View>
-                <View style={styles.headerStyles} >
-                    <Text style={styles.headerText}> Currency/Tiền tệ </Text>
+                <View style={headerContainer} >
+                    <Text style={headerText}> Currency/Tiền tệ </Text>
                 </View>
 
-                <View style={styles.unitRow} >
+                <View style={contentsContainer} >
 
                     <View style={{ flex: 2 }}>
                         <View style={styles.unitSelection} >
@@ -121,48 +127,7 @@ class Currency extends Component {
             </View>
         );
     }
-}
-
-const styles = {
-    headerStyles: {
-        paddingBottom: 10,
-        backgroundColor: '#15821e',
-        alignSelf: 'stretch',
-
-
-    },
-    headerText: {
-        color: '#ffffff',
-        fontSize: 20,
-
-
-    },
-    unitRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-
-    },
-    unitSelection: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-
-    },
-    resultText: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: 'black',
-        fontSize: 20,
-        paddingTop: 10,
-    },
-    inputStyle: {
-        fontWeight: 'bold',
-        color: 'black',
-        fontSize: 20,
-    },
-    pickerStyle: {
-        borderStyle: 'solid',
-        borderRadius: 10,
-    }
+    */
 }
 
 export default Currency;
