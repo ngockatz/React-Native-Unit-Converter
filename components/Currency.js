@@ -9,7 +9,7 @@ class Currency extends Component {
 
     state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '' }
 
-
+/*
     componentDidMount() {
         
         fetch('https://openexchangerates.org/api/latest.json?app_id=1cd652359fc14d158810a58807b31fbe')
@@ -20,12 +20,12 @@ class Currency extends Component {
                 this.setState({currency: JSON.parse(value)})
     }))
 }
-
+//*/
     calculate() {
         const { unitFrom, unitTo, result, userInput, currency } = this.state;
         
         // Intermediary: USD
-        if (this.state.userInput !== '' && currency !== '') {
+        if (this.state.userInput !== '' && currency!=='') {
             let intermediary, target;
             intermediary=userInput/currency.rates[unitFrom]
             target = intermediary*currency.rates[unitTo]
@@ -57,7 +57,7 @@ class Currency extends Component {
                         <View style={styles.unitSelection} >
                             <Picker
                                 selectedValue={this.state.unitFrom}
-                                style={{ height: 40, width: 100 }}
+                                style={{ height: 40, width: 150 }}
                                 onValueChange={(itemValue, itemIndex) =>
                                     this.setState({ unitFrom: itemValue }, () => {
                                         this.calculate()
@@ -97,7 +97,7 @@ class Currency extends Component {
                             <Picker
                                 style={styles.pickerStyle}
                                 selectedValue={this.state.unitTo}
-                                style={{ height: 40, width: 100 }}
+                                style={{ height: 40, width: 150 }}
                                 onValueChange={(itemVal, itemInd) => {
                                     this.setState({ unitTo: itemVal }, () =>
                                         this.calculate()
