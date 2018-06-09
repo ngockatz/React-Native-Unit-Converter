@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import s from './styles/Styles';
 
 
@@ -16,7 +16,7 @@ class Temp extends Component {
     }
 
     clearInput = () => {
-        this.setState({userInput:null});
+        this.setState({userInput:''});
     }
 
     handleToChange = (unit2) => {
@@ -44,8 +44,10 @@ class Temp extends Component {
             else if (this.state.unitTo == 'C') {
                 target = intermediary;
             };
-
-            this.setState({ result: this.formatNumber(parseFloat(target).toFixed(1)) });
+            if(isNaN(target))
+                Alert.alert('Problem occurred','Unrecognized character found. Remove it to proceed');
+            else    
+                this.setState({ result: this.formatNumber(parseFloat(target).toFixed(1)) });
         }
         else {
             this.setState({ result: null })
@@ -61,7 +63,7 @@ class Temp extends Component {
     }
 
     updateAndCalculate = (text) => {
-        this.setState({userInput: text},() => 
+        this.setState({userInput: text.replace(/,/g,'')},() => 
             this.calculate()
      )
     }
@@ -88,7 +90,7 @@ class Temp extends Component {
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}
-                                value= {this.state.userInput}
+                                value= {this.formatNumber(this.state.userInput)}
                                 onChangeText={this.updateAndCalculate}
                                 maxLength={18}
                                 keyboardType='numeric'

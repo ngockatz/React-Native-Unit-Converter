@@ -21,7 +21,7 @@ export default class App extends Component<Props> {
         </CardSection>
 */}
         <CardSection>
-          <Temp />
+          <Currency />
         </CardSection>
 
         <CardSection>
