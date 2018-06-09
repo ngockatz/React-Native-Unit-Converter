@@ -60,11 +60,11 @@ class Currency extends Component {
     }
 
     handleToChange = (unit2) => {
-        this.setState({unitTo: unit2},()=> this.calculate);
+        this.setState({unitTo: unit2},()=> this.calculate());
     }
 
     handleFromChange = (unit1) => {
-        this.setState({unitFrom:unit1},() => this.calculate);
+        this.setState({unitFrom:unit1},() => this.calculate());
     }
     swap = () => {
         let temp1, temp2;
