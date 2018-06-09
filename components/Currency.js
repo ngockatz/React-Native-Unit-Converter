@@ -130,7 +130,7 @@ class Currency extends Component {
                             <Picker.Item label="¥ JPY/Yên/Japanese Yen" value="JPY" />
                             <Picker.Item label="₩ KRW/Đồng Won Hàn/Korean Won" value="KRW" />
                             <Picker.Item label="€ EUR/Đồng Euro" value="EUR" /> 
-                            <Picker.Item label="£ Pound/Bảng Anh" value="GBP" />
+                            <Picker.Item label="£ GBP/Bảng Anh/Great Britain Pound" value="GBP" />
                         </Picker>
                         <View>
                             <TextInput

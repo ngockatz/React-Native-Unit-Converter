@@ -3,11 +3,11 @@ import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert } from 'r
 import s from './styles/Styles';
 
 
-class Temp extends Component {
+class Distance extends Component {
 
     constructor(props){
         super(props);
-        this.state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null }
+        this.state = { userInput: '', unitFrom: 'mi', unitTo: 'km', result: null }
         
     }
     
@@ -72,8 +72,8 @@ class Temp extends Component {
         return (
             
             <View>
-                <View style={[s.headerContainer,{backgroundColor: '#e82813'}]} >
-                    <Text style={s.headerText}> Temperature/Nhiệt độ </Text>
+                <View style={[s.headerContainer,{backgroundColor: '#2f48fd'}]} >
+                    <Text style={s.headerText}> Distance/Khoảng cách </Text>
                 </View>
 
                 <View style={s.contentsContainer} >
@@ -83,8 +83,15 @@ class Temp extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitFrom}
                             onValueChange={this.handleFromChange}>
-                            <Picker.Item label="°C (Celsius)" value="C" />
-                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                            <Picker.Item label="Km Kilometer/Cây số" value="km" />
+                            <Picker.Item label="M Meter/Mét (thước)" value="m" />
+                            <Picker.Item label="Cm Centimeter/xentimét (phân)" value="cm" />
+                            <Picker.Item label="Mm Millimeter/mi-li-mét (li)" value="mm" />
+                            <Picker.Item label="Mi Mile/Dặm" value="mi" />
+                            <Picker.Item label="Yd Yard/thước Anh" value="yd" />
+                            <Picker.Item label="Ft Foot/Bộ" value="ft" />
+                            <Picker.Item label="In Inch" value="in" />
+                            <Picker.Item label="N.m Nautical Mile/Hải lí" value="n.m" />
                         </Picker>
                         <View>
                             <TextInput
@@ -112,8 +119,15 @@ class Temp extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitTo}
                             onValueChange={this.handleToChange}>
-                            <Picker.Item label="°C (Celsius)" value="C" />
-                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                            <Picker.Item label="Km Kilometer/Cây số" value="km" />
+                            <Picker.Item label="M Meter/Mét (thước)" value="m" />
+                            <Picker.Item label="Cm Centimeter/xentimét (phân)" value="cm" />
+                            <Picker.Item label="Mm Millimeter/mi-li-mét (li)" value="mm" />
+                            <Picker.Item label="Mi Mile/Dặm" value="mi" />
+                            <Picker.Item label="Yd Yard/thước Anh" value="yd" />
+                            <Picker.Item label="Ft Foot/Bộ" value="ft" />
+                            <Picker.Item label="In Inch" value="in" />
+                            <Picker.Item label="N.m Nautical Mile/Hải lí" value="n.m" />
                         </Picker>
                         <View>
                             <Text style={[s.textStyle,s.resultText]}> {this.state.result} </Text>
@@ -129,4 +143,4 @@ class Temp extends Component {
     }
 }
 
-export default Temp;
+export default Distance;

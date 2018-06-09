@@ -3,11 +3,11 @@ import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert } from 'r
 import s from './styles/Styles';
 
 
-class Temp extends Component {
+class Weight extends Component {
 
     constructor(props){
         super(props);
-        this.state = { userInput: '', unitFrom: 'F', unitTo: 'C', result: null }
+        this.state = { userInput: '', unitFrom: 'kg', unitTo: 'lb', result: null }
         
     }
     
@@ -72,8 +72,8 @@ class Temp extends Component {
         return (
             
             <View>
-                <View style={[s.headerContainer,{backgroundColor: '#e82813'}]} >
-                    <Text style={s.headerText}> Temperature/Nhiệt độ </Text>
+                <View style={[s.headerContainer,{backgroundColor: '#ffcd94'}]} >
+                    <Text style={s.headerText}> Weight/Cân nặng </Text>
                 </View>
 
                 <View style={s.contentsContainer} >
@@ -83,8 +83,10 @@ class Temp extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitFrom}
                             onValueChange={this.handleFromChange}>
-                            <Picker.Item label="°C (Celsius)" value="C" />
-                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                            <Picker.Item label="Kg Kilogram/Cân" value="kg" />
+                            <Picker.Item label="G Gram/Gam" value="g" />
+                            <Picker.Item label="Lb Pound/Cân Anh" value="lb" />
+                            <Picker.Item label="Oz Ounce/Aoxơ" value="oz" />
                         </Picker>
                         <View>
                             <TextInput
@@ -112,8 +114,10 @@ class Temp extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitTo}
                             onValueChange={this.handleToChange}>
-                            <Picker.Item label="°C (Celsius)" value="C" />
-                            <Picker.Item label="°F (Farenheidt)" value="F" />
+                            <Picker.Item label="Kg Kilogram/Cân" value="kg" />
+                            <Picker.Item label="G Gram/Gam" value="g" />
+                            <Picker.Item label="Lb Pound/Cân Anh" value="lb" />
+                            <Picker.Item label="Oz Ounce/Aoxơ" value="oz" />
                         </Picker>
                         <View>
                             <Text style={[s.textStyle,s.resultText]}> {this.state.result} </Text>
@@ -129,4 +133,4 @@ class Temp extends Component {
     }
 }
 
-export default Temp;
+export default Weight;
