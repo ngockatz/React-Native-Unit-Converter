@@ -9,23 +9,21 @@ import {
 
 import CardSection from './components/CardSection';
 import Temp from './components/Temp';
-import Currency from './components/Currency'
+import Currency from './components/Currency';
+/*
+https://github.com/peacechen/react-native-modal-selector
+https://facebook.github.io/react-native/docs/actionsheetios.html
+https://github.com/sohobloo/react-native-modal-dropdown
+https://github.com/alinz/react-native-dropdown
+*/
 
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <ScrollView>
-{/*
-        <CardSection>
-          <Currency />
-        </CardSection>
-*/}
-        <CardSection>
-          <Currency />
-        </CardSection>
 
         <CardSection>
-          <Temp />
+          <Currency />
         </CardSection>
 
         <CardSection>

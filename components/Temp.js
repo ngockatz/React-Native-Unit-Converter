@@ -81,8 +81,8 @@ class Temp extends Component {
 
                     <View style={s.inputContainer}>
                         <Picker
+                            itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitFrom}
-                            style={s.pickerStyle}
                             onValueChange={this.handleFromChange}>
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
@@ -110,6 +110,7 @@ class Temp extends Component {
 
                     <View style={s.inputContainer}>
                         <Picker
+                            itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitTo}
                             onValueChange={this.handleToChange}>
                             <Picker.Item label="°C (Celsius)" value="C" />

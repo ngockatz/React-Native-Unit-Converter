@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity, AsyncStorage, Alert, Image, ActivityIndicator } from 'react-native';
+import { View, Text, Picker, TextInput, TouchableOpacity, AsyncStorage, Alert, Image, ActivityIndicator, 
+    ToastAndroid, AlertIOS, Platform } from 'react-native';
 import s from './styles/Styles';
 
 class Currency extends Component {
@@ -22,14 +23,29 @@ class Currency extends Component {
     }
 
     updateRates = () => {
+        if(Platform.OS==='android')
+            ToastAndroid.show('Downloading realtime currency rates...',ToastAndroid.SHORT)
+        else
+            AlertIOS.alert('Downloading realtime currency rates...')
         this.setState({loading:true});
         fetch('https://openexchangerates.org/api/latest.json?app_id=1cd652359fc14d158810a58807b31fbe')
             .then((response) => response.json())
-            .then((currency) => this.setState({ currency, loading:false }))
+            .then((currency) => {
+                this.setState({ currency, loading:false })
+                if(Platform.OS==='android')
+                        ToastAndroid.show('Rates downloaded',ToastAndroid.SHORT)
+                else
+                    AlertIOS.alert('Rates downloaded')
+            })
             .then(()=>AsyncStorage.setItem("offlineRates", JSON.stringify(this.state.currency)))
             .catch(()=> AsyncStorage.getItem("offlineRates").then((value) => {
-                if (value)
+                if (value){
                     this.setState({currency: JSON.parse(value),loading:false})
+                    if(Platform.OS==='android')
+                        ToastAndroid.show('Rates downloaded',ToastAndroid.SHORT)
+                    else
+                    AlertIOS.alert('Rates downloaded')
+                }
                 else
                     Alert.alert('Problem occurred','There was a problem updating real time rates.' +
                     'Make sure you have internet access')
@@ -84,7 +100,7 @@ class Currency extends Component {
     isLoading(){
         if (this.state.loading)
             return(
-                <ActivityIndicator size='small' color='lightgreen' />
+                <ActivityIndicator size='large' color='lightgreen' />
             );
         return(
             <TouchableOpacity onPress={this.updateRates}>
@@ -106,7 +122,7 @@ class Currency extends Component {
                     <View style={s.inputContainer}>
                         <Picker
                             selectedValue={this.state.unitFrom}
-                            style={s.pickerStyle}
+                            itemStyle={s.pickerStyle}
                             onValueChange={this.handleFromChange}>
                             <Picker.Item label="$ USD/Đôla Mỹ/US Dollar" value="USD" />
                             <Picker.Item label="₫ VND/Việt Nam Đồng/VN Dong" value="VND" />
@@ -136,6 +152,7 @@ class Currency extends Component {
 
                     <View style={s.inputContainer}>
                         <Picker
+                            itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitTo}
                             onValueChange={this.handleToChange}>
                             <Picker.Item label="$ USD/Đôla Mỹ/US Dollar" value="USD" />

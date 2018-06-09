@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 export default StyleSheet.create({
   headerContainer: {
     paddingBottom: 10,
@@ -22,7 +22,12 @@ export default StyleSheet.create({
 
   resultText: {
     textAlign:'center',
-    paddingBottom:12
+    ...Platform.select({
+      android:{
+        paddingBottom:12
+      }
+    })
+    
   },
   textStyle: {
     //fontWeight: "bold",
@@ -39,12 +44,14 @@ export default StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'space-around'
-  }
-  /*
+  },
+  
   pickerStyle: {
-    borderStyle: "solid",
-    borderRadius: 10,
-    backgroundColor:'blue'
-  }
-  */
+    ...Platform.select({
+      ios:{
+        height: 88
+      }
+    })
+  },
+  
 });
