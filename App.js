@@ -12,6 +12,8 @@ import Temp from './components/Temp';
 import Currency from './components/Currency';
 import Weight from './components/Weight';
 import Distance from './components/Distance';
+import Volume from './components/Volume';
+import Card from './components/Card';
 /*
 https://github.com/peacechen/react-native-modal-selector
 https://facebook.github.io/react-native/docs/actionsheetios.html
@@ -24,7 +26,7 @@ export default class App extends Component {
     return (
       
       <ScrollView>
-
+        <Card>
         <CardSection>
           <Currency />
         </CardSection>
@@ -38,9 +40,13 @@ export default class App extends Component {
         </CardSection>
 
         <CardSection>
-          <Temp />
+          <Volume />
         </CardSection>
 
+        <CardSection>
+          <Temp />
+        </CardSection>
+        </Card>
       </ScrollView>
      
     );

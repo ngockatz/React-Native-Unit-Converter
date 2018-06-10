@@ -60,8 +60,11 @@ class Currency extends Component {
             let intermediary, target;
             intermediary=this.state.userInput/this.state.currency.rates[this.state.unitFrom]
             target = intermediary*this.state.currency.rates[this.state.unitTo]
-            target = target.toFixed(2)
-            this.setState({ result: this.formatNumber(target) });
+
+            if(isNaN(target))
+                Alert.alert('Problem occurred','Unrecognized character found. Remove it to proceed');
+            else    
+                this.setState({ result: this.formatNumber(parseFloat(target).toFixed(2)) });
         }
         else {
             this.setState({ result: null })
@@ -100,7 +103,7 @@ class Currency extends Component {
     isLoading(){
         if (this.state.loading)
             return(
-                <ActivityIndicator size='large' color='lightgreen' />
+                <ActivityIndicator size='large' color= '#346359' />
             );
         return(
             <TouchableOpacity onPress={this.updateRates}>

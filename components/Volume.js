@@ -3,12 +3,14 @@ import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert } from 'r
 import s from './styles/Styles';
 
 
-class Weight extends Component {
+class Volume extends Component {
 
     constructor(props){
         super(props);
-        this.state = { userInput: '', unitFrom: 'kg', unitTo: 'lb', result: null,
-                        weight:{'kg':1000,'g':1,'lb':453.592,'oz':28.3495}
+        this.state = { userInput: '', unitFrom: 'c', unitTo: 'tbsp', result: null,
+                        volume:{'gal':3785.41,'c':240,'fl oz':29.5735,'tbsp':14.7868,
+                                'tsp':4.92892,'l':1000,'ml':1
+                    }
         }
         
     }
@@ -30,11 +32,11 @@ class Weight extends Component {
     }
 
     calculate = () => {
-        // Intermediary: Gram
+        // Intermediary: Millimeter
         if (this.state.userInput !== '') {
             let intermediary, target;
-            intermediary=this.state.userInput*this.state.weight[this.state.unitFrom]
-            target = intermediary/this.state.weight[this.state.unitTo]
+            intermediary=this.state.userInput*this.state.volume[this.state.unitFrom]
+            target = intermediary/this.state.volume[this.state.unitTo]
             if(isNaN(target))
                 Alert.alert('Problem occurred','Unrecognized character found. Remove it to proceed');
             else    
@@ -63,8 +65,8 @@ class Weight extends Component {
         return (
             
             <View>
-                <View style={[s.headerContainer,{backgroundColor: '#E79E6D'}]} >
-                    <Text style={s.headerText}> Weight/Cân nặng </Text>
+                <View style={[s.headerContainer,{backgroundColor: '#0ca4ff'}]} >
+                    <Text style={s.headerText}> Volume/Dung tích/Nấu ăn </Text>
                 </View>
 
                 <View style={s.contentsContainer} >
@@ -74,10 +76,13 @@ class Weight extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitFrom}
                             onValueChange={this.handleFromChange}>
-                            <Picker.Item label="Kg Kilogram/Cân" value="kg" />
-                            <Picker.Item label="G Gram/Gam" value="g" />
-                            <Picker.Item label="Lb Pound/Cân Anh" value="lb" />
-                            <Picker.Item label="Oz Ounce/Aoxơ" value="oz" />
+                            <Picker.Item label="Gal Gallon/Galông" value="gal" />
+                            <Picker.Item label="C Cup/Bát" value="c" />
+                            <Picker.Item label="Tbsp Tablespoon/Thìa canh" value="tbsp" />
+                            <Picker.Item label="Tsp Teaspoon/Thìa cà phê" value="tsp" />
+                            <Picker.Item label="Fl oz Fluid Ounce/Aoxơ lỏng " value="fl oz" />
+                            <Picker.Item label="L Liter/Lít" value="l" />
+                            <Picker.Item label="Ml Millileter/Mi-li-Lít" value="ml" />
                         </Picker>
                         <View>
                             <TextInput
@@ -105,10 +110,13 @@ class Weight extends Component {
                             itemStyle={s.pickerStyle}
                             selectedValue={this.state.unitTo}
                             onValueChange={this.handleToChange}>
-                            <Picker.Item label="Kg Kilogram/Cân" value="kg" />
-                            <Picker.Item label="G Gram/Gam" value="g" />
-                            <Picker.Item label="Lb Pound/Cân Anh" value="lb" />
-                            <Picker.Item label="Oz Ounce/Aoxơ" value="oz" />
+                            <Picker.Item label="Gal Gallon/Galông" value="gal" />
+                            <Picker.Item label="C Cup/Bát" value="c" />
+                            <Picker.Item label="Tbsp Tablespoon/Thìa canh" value="tbsp" />
+                            <Picker.Item label="Tsp Teaspoon/Thìa cà phê" value="tsp" />
+                            <Picker.Item label="Fl oz Fluid Ounce/Aoxơ lỏng " value="fl oz" />
+                            <Picker.Item label="L Liter/Lít" value="l" />
+                            <Picker.Item label="Ml Millileter/Mi-li-Lít" value="ml" />
                         </Picker>
                         <View>
                             <Text style={[s.textStyle,s.resultText]}> {this.state.result} </Text>
@@ -124,4 +132,4 @@ class Weight extends Component {
     }
 }
 
-export default Weight;
+export default Volume;

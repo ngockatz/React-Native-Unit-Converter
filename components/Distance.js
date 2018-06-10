@@ -7,7 +7,11 @@ class Distance extends Component {
 
     constructor(props){
         super(props);
-        this.state = { userInput: '', unitFrom: 'mi', unitTo: 'km', result: null }
+        this.state = { userInput: '', unitFrom: 'mi', unitTo: 'km', result: null,
+                        distance:{'km': 1000,'m': 1,'cm':0.01,'mm':0.001,'in':0.0254,
+                                    'mi':1609.34,'n.m':1852,'yd':0.9144,'ft':0.3048
+                    }
+        }
         
     }
     
@@ -28,22 +32,11 @@ class Distance extends Component {
     }
 
     calculate = () => {
-        // Intermediary: C
-        if (!!this.state.userInput) {
-            let target, intermediary;
-            if (this.state.unitFrom == 'F') {
-                intermediary = (this.state.userInput - 32) * 5 / 9;
-            }
-            else if (this.state.unitFrom == 'C') {
-                intermediary = this.state.userInput;
-            };
-
-            if (this.state.unitTo == 'F') {
-                target = intermediary * 1.8 + 32;
-            }
-            else if (this.state.unitTo == 'C') {
-                target = intermediary;
-            };
+        // Intermediary: Meter
+        if (this.state.userInput !== '') {
+            let intermediary, target;
+            intermediary=this.state.userInput*this.state.distance[this.state.unitFrom]
+            target = intermediary/this.state.distance[this.state.unitTo]
             if(isNaN(target))
                 Alert.alert('Problem occurred','Unrecognized character found. Remove it to proceed');
             else    
