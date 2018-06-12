@@ -7,7 +7,7 @@ class Currency extends Component {
 
     constructor(props){
     super(props)
-    this.state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '',loading:true }
+    this.state = { userInput: '', unitFrom: 'USD', unitTo: 'VND', result: null, currency: '',loading:true, date:'' }
     }
 
     componentDidMount(){
@@ -20,6 +20,14 @@ class Currency extends Component {
                 this.setState({loading:false})
             }
         )
+
+        AsyncStorage.getItem("lastUpdate").then((message) => {
+            if(message)
+                this.setState({date:message})
+            else
+                this.setState({date:'No data found for currency rates. Click the green down arrow button to update\n'+
+                'Không tìm thấy dữ liệu để chuyển đổi tiền tệ. Nhấn vào mũi tên xanh phía trên để cập nhật.'})
+        })
     }
 
     updateRates = () => {
@@ -28,10 +36,18 @@ class Currency extends Component {
         else
             AlertIOS.alert('Downloading realtime currency rates...')
         this.setState({loading:true});
+
+        var latest = new Date();
+        var message;
+        message = 'Last updated: ' + latest.toLocaleString() + '\nCập nhật lần cuối lúc: ' + latest.toLocaleString('vi')
+        + '\nClick the green arrow to update/Nhấn vào mũi tên xanh để cập nhật.' 
+        
+
         fetch('https://openexchangerates.org/api/latest.json?app_id=1cd652359fc14d158810a58807b31fbe')
             .then((response) => response.json())
             .then((currency) => {
-                this.setState({ currency, loading:false })
+                AsyncStorage.setItem('lastUpdate', message)
+                this.setState({ currency, loading:false, date:message })
                 if(Platform.OS==='android')
                         ToastAndroid.show('Rates downloaded',ToastAndroid.SHORT)
                 else
@@ -173,7 +189,7 @@ class Currency extends Component {
 
                 </View>
 
-
+                <Text style={{fontStyle:'italic'}} >{this.state.date}</Text>
 
             </View>
         );
