@@ -11,7 +11,6 @@ export default StyleSheet.create({
 
   contentsContainer: {
     flexDirection: "row",
-    //justifyContent: "space-between",
     alignItems: "stretch"
   },
 
@@ -30,12 +29,16 @@ export default StyleSheet.create({
     
   },
   textStyle: {
-    //fontWeight: "bold",
     color: "black",
     fontSize: 20,
+    ...Platform.select({
+      ios:{
+        height: 40
+      }
+    })
   },
 
-  iconStyle:{
+  iconStyle: {
     width:30,
     height:30
   },
@@ -49,9 +52,20 @@ export default StyleSheet.create({
   pickerStyle: {
     ...Platform.select({
       ios:{
-        height: 88
+        height: 120
       }
     })
   },
+
+  textInputContainerIOS:{
+    ...Platform.select({
+      ios:{
+        marginTop:10,
+        borderWidth:1,
+        borderColor:'black'
+      }
+    })
+    
+  }
   
 });

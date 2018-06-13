@@ -151,7 +151,7 @@ class Currency extends Component {
                             <Picker.Item label="€ EUR/Đồng Euro" value="EUR" /> 
                             <Picker.Item label="£ GBP/Bảng Anh/Great Britain Pound" value="GBP" />
                         </Picker>
-                        <View>
+                        <View style ={s.textInputContainerIOS} >
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}

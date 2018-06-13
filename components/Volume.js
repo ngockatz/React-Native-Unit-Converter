@@ -84,7 +84,7 @@ class Volume extends Component {
                             <Picker.Item label="L Liter/Lít" value="l" />
                             <Picker.Item label="Ml Millileter/Mi-li-Lít" value="ml" />
                         </Picker>
-                        <View>
+                        <View style ={s.textInputContainerIOS}>
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}

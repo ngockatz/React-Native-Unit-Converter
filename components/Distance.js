@@ -86,7 +86,7 @@ class Distance extends Component {
                             <Picker.Item label="In Inch" value="in" />
                             <Picker.Item label="N.m Nautical Mile/Hải lí" value="n.m" />
                         </Picker>
-                        <View>
+                        <View style ={s.textInputContainerIOS} >
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}

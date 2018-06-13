@@ -86,7 +86,7 @@ class Temp extends Component {
                             <Picker.Item label="°C (Celsius)" value="C" />
                             <Picker.Item label="°F (Farenheidt)" value="F" />
                         </Picker>
-                        <View>
+                        <View style ={s.textInputContainerIOS}>
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}

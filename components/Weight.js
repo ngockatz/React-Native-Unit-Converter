@@ -79,7 +79,7 @@ class Weight extends Component {
                             <Picker.Item label="Lb Pound/Cân Anh" value="lb" />
                             <Picker.Item label="Oz Ounce/Aoxơ" value="oz" />
                         </Picker>
-                        <View>
+                        <View style ={s.textInputContainerIOS}>
                             <TextInput
                                 placeholder="Nhập số"
                                 style={s.textStyle}
