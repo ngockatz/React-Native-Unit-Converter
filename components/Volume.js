@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, Picker, TextInput, TouchableOpacity, Image, Alert, Platform } from 'react-native';
 import s from './styles/Styles';
 
 
@@ -92,6 +92,7 @@ class Volume extends Component {
                                 onChangeText={this.updateAndCalculate}
                                 maxLength={18}
                                 keyboardType='numeric'
+                                clearButtonMode='while-editing'
                             />
                         </View>
                     </View>
@@ -100,9 +101,11 @@ class Volume extends Component {
                             <Image source={require('../assets/images/swap-icon.png')} style={s.iconStyle}/>
                         </TouchableOpacity>
 
+                        {Platform.OS === 'android' &&
                         <TouchableOpacity onPress={this.clearInput}>
                             <Image source={require('../assets/images/trash-icon.png')} style={s.iconStyle}/> 
                         </TouchableOpacity>
+                        }
                     </View>
 
                     <View style={s.inputContainer}>

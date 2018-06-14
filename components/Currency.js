@@ -151,15 +151,21 @@ class Currency extends Component {
                             <Picker.Item label="€ EUR/Đồng Euro" value="EUR" /> 
                             <Picker.Item label="£ GBP/Bảng Anh/Great Britain Pound" value="GBP" />
                         </Picker>
-                        <View style ={s.textInputContainerIOS} >
+                        <View style ={[s.textInputContainerIOS,{flexDirection:'row'}]} >
                             <TextInput
                                 placeholder="Nhập số"
-                                style={s.textStyle}
+                                style={[s.textStyle,{flex:5}]}
                                 value= {this.formatNumber(this.state.userInput)}
                                 onChangeText={this.updateAndCalculate}
                                 maxLength={18}
                                 keyboardType='numeric'
+                                clearButtonMode='while-editing'
                             />
+                            {Platform.OS === 'android' &&
+                            <TouchableOpacity onPress={this.clearInput} style={{alignSelf:'center'}} >
+                                <Image source={require('../assets/images/trash-icon.png')} style= {{width:18,height:18}} /> 
+                            </TouchableOpacity>
+                            }
                         </View>
                     </View>
                     <View style={s.iconContainer} >
