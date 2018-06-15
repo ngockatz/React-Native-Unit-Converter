@@ -14,14 +14,14 @@ import Weight from './components/Weight';
 import Distance from './components/Distance';
 import Volume from './components/Volume';
 import Card from './components/Card';
-/*
-https://github.com/peacechen/react-native-modal-selector
-https://facebook.github.io/react-native/docs/actionsheetios.html
-https://github.com/sohobloo/react-native-modal-dropdown
-https://github.com/alinz/react-native-dropdown
-*/
+import Splashscreen from 'react-native-splash-screen';
 
 export default class App extends Component {
+
+  componentDidMount(){
+    Splashscreen.hide();
+  }
+
   render() {
     return (
       
