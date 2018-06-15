@@ -12,7 +12,7 @@ A simple and not too fancy unit converter that solves common unit confusion. Run
 
 ## Screenshot
 
-![demo]('./assets/app_demo.gif')
+![demo](./assets/app_demo.gif)
 
 
 ## Authors
