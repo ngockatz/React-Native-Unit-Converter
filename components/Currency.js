@@ -47,7 +47,7 @@ class Currency extends Component {
             .then((response) => response.json())
             .then((currency) => {
                 AsyncStorage.setItem('lastUpdate', message)
-                this.setState({ currency, loading:false, date:message })
+                this.setState({ currency, loading:false, date:message }),() => this.calculate()
                 if(Platform.OS==='android')
                         ToastAndroid.show('Rates downloaded',ToastAndroid.SHORT)
                 else
@@ -78,7 +78,9 @@ class Currency extends Component {
             target = intermediary*this.state.currency.rates[this.state.unitTo]
 
             if(isNaN(target))
-                Alert.alert('Problem occurred','Unrecognized character found. Remove it to proceed');
+                Alert.alert('Input Error','Unrecognized character found. Remove it to proceed\n'+
+                'Bạn đã nhập sai kí tự. Chỉ nhập số (hoặc dấu . nếu đây là số thập phân). Hãy xóa kí tự vừa nhập để tiếp tục.'
+            );
             else    
                 this.setState({ result: this.formatNumber(parseFloat(target).toFixed(2)) });
         }
